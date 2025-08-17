@@ -8,6 +8,8 @@ import Footer from './components/footer/Footer'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import Cart from './components/cart/Cart'
+import RestaurantRoute from './routers/RestaurantRoute'
+import RestaurantPage from './pages/RestaurantPage'
 
 
 
@@ -31,7 +33,8 @@ const App = () => {
         <Route path='/about' element={<AboutPage />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/user/:id/dashboard*' element={<UserDashboard />} />
-        <Route path='/restaurant/:id/dashboard*' element={<div>Restaurant Page - Coming Soon</div>} />
+        <Route path='/restaurant/:id' element={<RestaurantPage />} />
+        <Route path='/restaurant/:id/dashboard*' element={<RestaurantRoute />} />
         <Route path='*' element={<div>404 - Page Not Found</div>} />
       </Routes>
       <Footer />

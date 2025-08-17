@@ -68,3 +68,39 @@ export const fetchAdminCategories = () => async (dispatch) => {
   }
 };
 
+// Update category
+export const updateCategory = (categoryId, categoryData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_CATEGORY_REQUEST });
+    const response = await api.put(`/api/admin/category/${categoryId}`, categoryData);
+    dispatch({
+      type: UPDATE_CATEGORY_SUCCESS,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_CATEGORY_FAILURE,
+      payload: error.response?.data?.message || 'Failed to update category'
+    });
+    throw error;
+  }
+};
+
+// Delete category
+export const deleteCategory = (categoryId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_CATEGORY_REQUEST });
+    await api.delete(`/api/admin/category/${categoryId}`);
+    dispatch({
+      type: DELETE_CATEGORY_SUCCESS,
+      payload: categoryId
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_CATEGORY_FAILURE,
+      payload: error.response?.data?.message || 'Failed to delete category'
+    });
+    throw error;
+  }
+};
+

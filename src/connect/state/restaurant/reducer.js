@@ -296,9 +296,7 @@ const restaurantReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ordersLoading: false,
-                orders: state.orders.map(order => 
-                    order._id === action.payload._id ? action.payload : order
-                ),
+                orders: action.payload,
                 ordersError: null
             };
         case UPDATE_ORDER_STATUS_FAILURE:

@@ -96,17 +96,18 @@ const orderReducer = (state = initialState, action) => {
                 loading: true,
                 error: null,
             };
-        case UPDATE_ORDER_STATUS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                orders: state.orders.map((order) =>
-                    order._id === action.payload._id ? action.payload : order
-                ),
-                restaurantOrders: state.restaurantOrders.map((order) =>
-                    order._id === action.payload._id ? action.payload : order
-                ),
-            };
+         case UPDATE_ORDER_STATUS_SUCCESS:
+    return {
+        ...state,
+        loading: false,
+        orders: state.orders.map((order) =>
+            order._id === action.payload._id ? action.payload : order
+        ),
+        restaurantOrders: state.restaurantOrders.map((order) =>
+            order._id === action.payload._id ? action.payload : order
+        ),
+    };
+
         case UPDATE_ORDER_STATUS_FAILURE:
             return {
                 ...state,

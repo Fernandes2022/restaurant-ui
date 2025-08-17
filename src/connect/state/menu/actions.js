@@ -25,7 +25,7 @@ import {
 export const fetchMenuItems = (restaurantId) => async (dispatch) => {
     try {
         dispatch({ type: FETCH_MENU_ITEMS_REQUEST });
-        const response = await api.get(`/api/admin/food/restaurant/${restaurantId}`);
+        const response = await api.get(`/api/food/restaurant/${restaurantId}`);
         dispatch({
             type: FETCH_MENU_ITEMS_SUCCESS,
             payload: response.data
@@ -116,11 +116,11 @@ export const clearSearchResults = () => (dispatch) => {
     dispatch({ type: CLEAR_SEARCH_RESULTS });
 };
 
-// Update item availability
-export const updateItemAvailability = (itemId, isAvailable) => async (dispatch) => {
+
+export const updateItemAvailability = (id, isAvailable) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_ITEM_AVAILABILITY_REQUEST });
-        const response = await api.patch(`/api/admin/food/${itemId}/availability`, { isAvailable });
+        const response = await api.put(`/api/admin/food/status/${id}`, { isAvailable });
         dispatch({
             type: UPDATE_ITEM_AVAILABILITY_SUCCESS,
             payload: response.data
@@ -132,4 +132,4 @@ export const updateItemAvailability = (itemId, isAvailable) => async (dispatch) 
         });
         throw error;
     }
-}; 
+};

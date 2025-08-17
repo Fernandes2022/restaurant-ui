@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserOrders } from '../../connect/state/order/actions';
 
 const Orders = () => {
   const dispatch = useDispatch();
   const { orders, loading, error } = useSelector((state) => state.order);
+  const [hasFetched, setHasFetched] = useState(false);
 
   useEffect(() => {
+    // Always fetch fresh data when component mounts
+    setHasFetched(true);
     dispatch(getUserOrders());
   }, [dispatch]);
 
@@ -61,7 +64,8 @@ const Orders = () => {
     return status.replace('_', ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
   };
 
-  if (loading) {
+  // Show loading if we're loading OR if we haven't fetched yet
+  if (loading || !hasFetched) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -78,12 +82,22 @@ const Orders = () => {
           </svg>
           <p className="text-lg font-semibold">Error loading orders</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">{error}</p>
+          <button 
+            onClick={() => {
+              setHasFetched(false);
+              dispatch(getUserOrders());
+            }}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );
   }
 
-  if (!orders || orders.length === 0) {
+  // Only show "No orders found" if we've fetched and there are no orders
+  if (hasFetched && (!orders || orders.length === 0)) {
     return (
       <div className="text-center py-8">
         <div className="text-gray-500 dark:text-gray-400 mb-4">
@@ -124,7 +138,7 @@ const Orders = () => {
                   {formatDate(order.createdAt)}
                 </td>
                 <td className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
-                  {formatCurrency((order.totalAmount + order.deliveryFee))}
+                  {formatCurrency(order.totalAmount)}
                 </td>
                 <td className="px-4 py-3">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeStyle(order.orderStatus)}`}>

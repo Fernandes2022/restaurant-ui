@@ -60,7 +60,7 @@ const NavBar = () => {
   useEffect(() => {
     if (userProfile && userProfile !== null && authModalOpen) {
       setAuthModalOpen(false);
-      navigate(userProfile.role === 'ROLE_RESTAURANT_OWNER' ? '/restaurant/dashboard' : '/user/dashboard');
+        navigate(userProfile.role === 'ROLE_RESTAURANT_OWNER' ? `/restaurant/${userProfile._id}/dashboard` : `/user/${userProfile._id}/dashboard`);
     }
   }, [userProfile, navigate]); // Removed authModalOpen from dependencies
 
@@ -86,7 +86,7 @@ const NavBar = () => {
     if (!userProfile || userProfile === null) {
       setAuthModalOpen(true);
     } else {
-      navigate(userProfile.role === 'ROLE_RESTAURANT_OWNER' ? '/restaurant/dashboard' : `/user/${userProfile._id}/dashboard`);
+      navigate(userProfile.role === 'ROLE_RESTAURANT_OWNER' ? `/restaurant/${userProfile._id}/dashboard` : `/user/${userProfile._id}/dashboard`);
     }
   };
 
@@ -118,7 +118,7 @@ const NavBar = () => {
             <div className="pr-2">
               <Link to={'/'}>
                 <h1 className="font-bold tracking-tighter text-3xl bg-gradient-to-r from-orange-300 to-yellow-100 bg-clip-text text-transparent">
-                  NutMeg
+                  Nutri-C
                 </h1>
               </Link>
             </div>
@@ -154,7 +154,7 @@ const NavBar = () => {
                         <p className="text-sm text-gray-500 dark:text-gray-400">{result.description}</p>
                         {result.price && (
                           <p className="text-sm font-medium text-orange-600 dark:text-orange-400">
-                            ${result.price}
+                            ₦{result.price}
                           </p>
                         )}
                       </div>

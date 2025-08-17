@@ -73,14 +73,17 @@ export const getRestaurantOrders = () => async (dispatch) => {
 };
 
 // Update Order Status (Admin)
-export const updateOrderStatus = (orderId, status) => async (dispatch) => {
+
+export const updateOrderStatus = (orderId, orderStatus) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_ORDER_STATUS_REQUEST });
-        await api.patch(`/api/admin/order/${orderId}/status`, { status });
-        const refreshedOrders = await api.get(`/api/admin/order/restaurant`);
+        
+        
+        const { data: updatedOrder } = await api.put(`/api/admin/order/${orderId}/${orderStatus}`);
+        
         dispatch({
             type: UPDATE_ORDER_STATUS_SUCCESS,
-            payload: refreshedOrders.data
+            payload: updatedOrder 
         });
     } catch (error) {
         dispatch({
@@ -90,6 +93,7 @@ export const updateOrderStatus = (orderId, status) => async (dispatch) => {
         throw error;
     }
 };
+
 
 // Cancel Order
 export const cancelOrder = (orderId) => async (dispatch) => {

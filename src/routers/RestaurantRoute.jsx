@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import AdminPage from '../pages/AdminPage'
 
 
 const RestaurantRoute = () => {
   return (
     <Routes>
-        <Route path='/restaurant/:id/dashboard*' element={<div>Restaurant Page - Coming Soon</div>} />
+        <Route path='/' element={<AdminPage />} />
     </Routes>
   )
 }
