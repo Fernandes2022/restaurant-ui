@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup, login, forgotPassword, resetPassword } from '../../connect/state/auth/actions';
-import { Modal, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { Modal } from '@mui/material'
 
 const AuthModal = ({ open, handleClose }) => {
   const dispatch = useDispatch();
@@ -47,13 +48,7 @@ const AuthModal = ({ open, handleClose }) => {
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="auth-modal"
-      className="flex items-center justify-center"
-      sx={{ zIndex: 1400 }}
-    >
+    <Modal open={open} onClose={handleClose} sx={{ zIndex: 1400 }} className="flex items-center justify-center">
       <div className="bg-white dark:bg-black p-6 rounded-lg shadow-xl w-full max-w-sm mx-4">
         <h2 className="text-xl font-bold text-center mb-4">
           {mode === 'login' && 'Login'}

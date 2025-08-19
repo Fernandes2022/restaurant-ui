@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../connect/state/auth/actions';
 import { fetchRestaurants } from '../connect/state/restaurant/actions';
 import { useNavigate } from 'react-router-dom';
+ 
 
 const sections = [
   { key: 'profile', label: 'Profile' },

@@ -6,6 +6,7 @@ import { Add, Remove, ShoppingCart, Restaurant, Star, LocationOn, Phone, AccessT
 import { fetchRestaurants, addToFavourite } from '../connect/state/restaurant/actions';
 import { addToCart, fetchCart } from '../connect/state/cart/actions';
 import { fetchCategories } from '../connect/state/category/actions';
+ 
 
 const RestaurantPage = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const RestaurantPage = () => {
   const menuItems = restaurant?.foods || [];
   const cart = useSelector((state) => state.cart.cart);
   const cartItems = cart?.items || [];
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     dispatch(fetchRestaurants());
@@ -57,7 +59,10 @@ const RestaurantPage = () => {
   };
 
   const handleAddToCart = async (item, currentQuantity) => {
-  
+    if (!token) {
+      alert('Please log in to add items to cart.');
+      return;
+    }
 
     setAddingItemId(item._id);
     try {
@@ -98,11 +103,11 @@ const RestaurantPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-black pt-32 px-6">
-      <div className="bg-white dark:bg-black   shadow-lg">
+    <div className="min-h-screen bg-gray-50 dark:bg-black pt-32 px-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+      <div className="bg-white dark:bg-black   shadow-lg" data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="200">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="w-full md:w-64 h-48 md:h-48 rounded-lg overflow-hidden flex-shrink-0">
+            <div className="w-full md:w-64 h-48 md:h-48 rounded-lg overflow-hidden flex-shrink-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
               <img
                 src={restaurant.images?.[0] || '/default-restaurant.jpg'}
                 alt={restaurant.name}
@@ -113,20 +118,20 @@ const RestaurantPage = () => {
             <div className="flex-1">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+                  <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     {restaurant.name}
                   </h1>
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
                       <Star className="text-yellow-500" />
                       <span>4.5</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                       <LocationOn />
                       <span>{restaurant.address?.streetAddress}, {restaurant.address?.city}, {restaurant.address?.state}</span>
                     </div>
                     {restaurant.contactInformation?.phone && (
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="350">
                         <Phone />
                         <span>{restaurant.contactInformation.phone}</span>
                       </div>
@@ -135,12 +140,12 @@ const RestaurantPage = () => {
                 </div>
               </div>
 
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-gray-600 dark:text-gray-400 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 {restaurant.description}
               </p>
 
               {restaurant.openingHours && (
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
                   <AccessTime />
                   <span>{restaurant.openingHours}</span>
                 </div>
@@ -152,8 +157,8 @@ const RestaurantPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="w-full lg:w-64 bg-white dark:bg-black dark:border-[0.2px] dark:border-orange-300 rounded-lg shadow-lg p-6 flex-shrink-0">
-            <h2 className="text-xl font-bold text-orange-600 dark:text-orange-300 mb-4">Categories</h2>
+          <aside className="w-full lg:w-64 bg-white dark:bg-black dark:border-[0.2px] dark:border-orange-300 rounded-lg shadow-lg p-6 flex-shrink-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+            <h2 className="text-xl font-bold text-orange-600 dark:text-orange-300 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Categories</h2>
             {categoriesLoading ? (
               <div className="flex justify-center py-4">
                 <CircularProgress size={24} className="text-orange-600" />
@@ -170,7 +175,7 @@ const RestaurantPage = () => {
                 >
                   All
                 </button>
-                {categories.map((category) => (
+                {categories.map((category, idx) => (
                   <button
                     key={category._id}
                     onClick={() => setSelectedCategory(category._id)}
@@ -179,6 +184,7 @@ const RestaurantPage = () => {
                         ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100'
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'
                     }`}
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 120}
                   >
                     {category.name}
                   </button>
@@ -188,23 +194,23 @@ const RestaurantPage = () => {
           </aside>
 
           <main className="flex-1">
-            <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6">
+            <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Menu</h2>
-                <div className="flex items-center gap-2 text-orange-600 dark:text-orange-300">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Menu</h2>
+                <div className="flex items-center gap-2 text-orange-600 dark:text-orange-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
                   <ShoppingCart />
                   <span className="font-semibold">{cartItems.length} items</span>
                 </div>
               </div>
 
               {filteredMenuItems.length === 0 ? (
-                <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                <div className="text-center py-12 text-gray-500 dark:text-gray-400" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                   <Restaurant className="text-6xl mb-4 mx-auto" />
                   <p>No menu items found for this category.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMenuItems.map((item) => {
+                  {filteredMenuItems.map((item, idx) => {
                     const cartQuantity = getCartQuantity(item._id);
                     const currentQuantity = quantities[item._id] || 0;
 
@@ -212,6 +218,7 @@ const RestaurantPage = () => {
                       <div
                         key={item._id}
                         className="dark:border-[0.2px] dark:border-orange-300 rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform hover:-translate-y-1 bg-white dark:bg-black p-2"
+                        data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 150}
                       >
                         <div className="h-32 md:h-40 overflow-hidden">
                           <img

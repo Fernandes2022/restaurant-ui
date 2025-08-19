@@ -63,34 +63,35 @@ const Testimonial = ({handleRestaurantRoute}) => {
   return (
     <section className="py-12 dark:bg-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 dark:bg-black dark:text-white">
-        {/* Header */}
-        <div className="text-center mb-16 dark:text-white">
+        
+        <div data-aos="flip-down" data-aos-duration="1000" data-aos-delay="100" className="text-center mb-16 dark:text-white">
           <h2 className="text-4xl font-bold text-gray-900 mb-4 dark:text-white">
-            What Our Community Says
+            What Our Customers Says
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-300">
             Discover why our neighbors and food lovers keep coming back for our authentic flavors and warm hospitality
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
+        
+        <div data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="200" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, idx) => (
             <div
               key={testimonial.id}
               className="bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300 hover:shadow-2xl dark:bg-black dark:text-white dark:border-orange-300 dark:border-[1px]"
+              data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 150}
             >
-              {/* Rating */}
+              
               <div className="flex mb-6">
                 {renderStars(testimonial.rating)}
               </div>
 
-              {/* Quote */}
+              
               <blockquote className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6 italic">
                 "{testimonial.quote}"
               </blockquote>
 
-              {/* Customer Info */}
+              
               <div className="flex items-center">
                 <img
                   src={testimonial.image}
@@ -110,9 +111,9 @@ const Testimonial = ({handleRestaurantRoute}) => {
           ))}
         </div>
 
-        {/* Call to Action */}
+        
         <div className="text-center mt-16 ">
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto dark:bg-black dark:text-white">
+          <div data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100" className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto dark:bg-black dark:text-white">
             <h3 className="text-2xl font-bold text-gray-900 mb-4 dark:text-white">
               Join Our Growing Family
             </h3>

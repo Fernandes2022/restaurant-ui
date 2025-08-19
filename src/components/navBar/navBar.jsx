@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { searchMenuItems, clearSearchResults } from '../../connect/state/menu/actions';
 import { fetchCart } from '../../connect/state/cart/actions';
-import { getUserProfile } from '../../connect/state/user/actions'; // Use the correct user profile action
+import { getUserProfile } from '../../connect/state/user/actions';
 import { LightMode, DarkMode, Menu, Close, Person, Search, ShoppingCart } from '@mui/icons-material';
 import { ModeContext } from '../Mode';
 import { Box, IconButton, Badge, Avatar } from '@mui/material';
 import AuthModal from './AuthModal';
+
 
 const NavBar = () => {
   const [query, setQuery] = useState('');
@@ -110,9 +111,9 @@ const NavBar = () => {
     <>
       <header className="lg:px-4">
         <nav
+          className="top-0 left-0 right-0 border border-t-0 border-r-0 border-l-0 dark:bg-black border-b-slate-200 dark:border-b-slate-500 fixed z-50 backdrop-blur-3xl py-2"
           data-aos="flip-up"
           data-aos-duration="2000"
-          className="top-0 left-0 right-0 border border-t-0 border-r-0 border-l-0 dark:bg-black border-b-slate-200 dark:border-b-slate-500 fixed z-50 backdrop-blur-3xl py-2"
         >
           <div className="flex items-center justify-between z-50 px-4">
             <div className="pr-2">
@@ -124,7 +125,7 @@ const NavBar = () => {
             </div>
 
             {/* Search Box */}
-            <div className="w-full max-w-sm relative px-3">
+            <div className=" md:w-full max-w-sm relative px-3">
               <div className="flex items-center border border-gray-300 rounded-2xl px-3 py-1 bg-white shadow-sm">
                 <Search className="text-gray-500 mr-2" />
                 <input
@@ -231,7 +232,7 @@ const NavBar = () => {
                 </Avatar>
               </IconButton>
 
-              {/* Theme Toggle */}
+              
               <IconButton
                 onClick={themeToggle}
                 className="text-orange-600 hover:text-orange-700 transition-colors"
@@ -244,7 +245,7 @@ const NavBar = () => {
                   },
                 }}
               >
-                {theme ? (
+                {theme === 'dark' ? (
                   <LightMode className="text-orange-300" sx={{ fontSize: 28 }} />
                 ) : (
                   <DarkMode className="text-orange-300" sx={{ fontSize: 28 }} />
@@ -266,7 +267,9 @@ const NavBar = () => {
 
         {/* Mobile Menu */}
         {navMobile && (
-          <div className="fixed top-20 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700 shadow-lg sm:hidden">
+          <div
+            className="fixed top-20 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700 shadow-lg sm:hidden"
+          >
             <div className="px-4 py-6 space-y-4">
               {isHomePage && (
                 <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700">
@@ -347,7 +350,7 @@ const NavBar = () => {
                     },
                   }}
                 >
-                  {theme ? (
+                  {theme === 'dark' ? (
                     <LightMode className="text-orange-300" sx={{ fontSize: 28 }} />
                   ) : (
                     <DarkMode className="text-orange-300" sx={{ fontSize: 28 }} />

@@ -87,14 +87,14 @@ const MenuCarousel = () => {
 
   return (
     <div className="px-4 py-20">
-      <h2 className="font-bold text-center text-gray-800 dark:text-white my-8 pb-12 text-4xl">
+      <h2 data-aos="fade-up" data-aos-duration="2000" data-aos-delay="100" className="font-bold text-center text-gray-800 dark:text-white my-8 pb-12 text-4xl">
         Menu Items
       </h2>
       
-      <div className="shadow-lg px-12 dark:border-orange-300 dark:border-[1px] dark:border-x-0">
+      <div data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="200" className="shadow-lg px-12 dark:border-orange-300 dark:border-[1px] dark:border-x-0">
       <Slider {...settings}>
         {snacks.map((snack, index) => (
-          <div key={index} className="px-2 py-4 pb-14">
+          <div key={index} className="px-2 py-4 pb-14" data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(index + 1) * 120}>
             <div className="flex flex-col items-center ">
               <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg mb-3 hover:shadow-xl transition-shadow duration-300">
                 <img

@@ -97,7 +97,7 @@ export const deleteMenuItem = (itemId) => async (dispatch) => {
 export const searchMenuItems = (searchTerm) => async (dispatch) => {
     try {
         dispatch({ type: SEARCH_MENU_ITEMS_REQUEST });
-        const response = await api.get(`/api/admin/food/search?q=${searchTerm}`);
+        const response = await api.get(`/api/food/search?q=${searchTerm}`);
         dispatch({
             type: SEARCH_MENU_ITEMS_SUCCESS,
             payload: response.data

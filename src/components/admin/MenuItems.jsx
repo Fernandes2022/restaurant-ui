@@ -255,8 +255,8 @@ const MenuItems = () => {
               <div className="flex justify-between items-center">
                 <span className={`px-4 py-2 rounded-full text-xs font-medium ${
                   item.available 
-                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    ? 'bg-green-500 text-white' 
+                    : 'bg-black text-green-500'
                 }`}>
                   {item.available ? 'Available' : 'Unavailable'}
                 </span>

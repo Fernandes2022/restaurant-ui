@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IconButton, Modal, Box } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { Add, Remove, Delete, ShoppingCart, LocationOn } from '@mui/icons-material';
 import {
   updateCartItemQuantity,
@@ -11,6 +11,7 @@ import {
 } from '../../connect/state/cart/actions';
 import { createOrder } from '../../connect/state/order/actions';
 import { sendAdminNewOrderEmail } from '../../services/notifications';
+import { Modal, Box } from '@mui/material';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -150,11 +151,11 @@ const Cart = () => {
   };
 
   return (
-    <div className="mt-16 pt-8 px-2 md:px-8 lg:px-20 min-h-screen bg-gray-50 dark:bg-black transition-colors">
-      <div className="flex flex-col lg:flex-row gap-8 pt-10 px-4 pb-20 justify-center items-center">
+    <div className="mt-16 pt-8 px-2 md:px-8 lg:px-20 min-h-screen bg-gray-50 dark:bg-black transition-colors" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+      <div className="flex flex-col lg:flex-row gap-8 pt-10 px-4 pb-20 justify-center items-center" data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="200">
         {/* Cart Details */}
-        <div className="flex-1 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow p-16">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-orange-600 dark:text-orange-300">
+        <div className="flex-1 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow p-16" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-orange-600 dark:text-orange-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             <ShoppingCart /> Cart Details
           </h2>
           {cartItems.length === 0 ? (
@@ -167,10 +168,11 @@ const Cart = () => {
                 </div>
               )}
               <div className="space-y-12 py-6">
-                {cartItems.map((item) => (
+                {cartItems.map((item, index) => (
                   <div
                     key={item._id}
                     className="flex items-center gap-8 border-b border-gray-200 dark:border-gray-700 pb-4 last:border-b-0"
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(index + 1) * 120}
                   >
                     <img
                       src={item.food.images[0]}
@@ -234,7 +236,7 @@ const Cart = () => {
               </div>
 
               {/* Totals and Clear Cart */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-8 gap-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-8 gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
                 <div className="text-lg font-semibold text-gray-700 dark:text-gray-200">
                   Total Quantity: <span className="text-orange-600 dark:text-orange-300">{totalQuantity}</span>
                   <br />
@@ -276,8 +278,8 @@ const Cart = () => {
         </div>
 
         {/* Delivery Address */}
-        <div className="flex-1 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow p-14">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-orange-600 dark:text-orange-300">
+        <div className="flex-1 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow p-14" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-orange-600 dark:text-orange-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
             <LocationOn /> Delivery Address
           </h2>
           {hasUnavailableItem && (
@@ -286,13 +288,14 @@ const Cart = () => {
             </div>
           )}
           {addresses.length === 0 ? (
-            <div className="text-gray-500 dark:text-gray-400 mb-4">No saved addresses found.</div>
+            <div className="text-gray-500 dark:text-gray-400 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">No saved addresses found.</div>
           ) : (
             <div className="space-y-10 mb-6">
-              {addresses.map((address) => (
+              {addresses.map((address, idx) => (
                 <div
                   key={address._id}
                   className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 flex flex-col md:flex-row items-center md:justify-between gap-6"
+                  data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 150}
                 >
                   <div>
                     <div className="font-semibold text-gray-800 dark:text-gray-100">{address.fullName}</div>
@@ -329,6 +332,7 @@ const Cart = () => {
             className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-lg w-full mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => setModalOpen(true)}
             disabled={cartItems.length === 0 || hasUnavailableItem}
+            data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250"
           >
             {hasUnavailableItem ? 'some item is not available' : 'Add New Address & Order'}
           </button>
@@ -339,7 +343,7 @@ const Cart = () => {
 
       {/* Modal */}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box className="absolute top-1/2 left-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow-lg p-8 outline-none">
+        <Box className="absolute top-1/2 left-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow-lg p-8 outline-none" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
           <h3 className="text-xl font-bold mb-4 text-orange-600 dark:text-orange-300">Add New Address & Order</h3>
           {hasUnavailableItem && (
             <div className="mb-4 p-3 rounded bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border border-red-200 dark:border-red-800">

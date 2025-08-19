@@ -13,8 +13,8 @@ const AboutUs = () => {
   return (
     <section className="py-16 bg-gray-50 dark:bg-black">
       <div className="container mx-auto px-4">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
+    
+        <div data-aos="fade-up" data-aos-duration="2000" data-aos-delay="100" className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
             About Our Restaurant
           </h1>
@@ -24,8 +24,8 @@ const AboutUs = () => {
           </p>
         </div>
 
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+    
+        <div data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="300" className="grid md:grid-cols-2 gap-12 mb-16">
           <div className="bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 p-8 rounded-lg shadow-lg">
             <div className="w-16 h-16 bg-orange-300 rounded-full flex items-center justify-center mb-6">
               <Bolt className="w-8 h-8 text-gray-800" />
@@ -33,7 +33,7 @@ const AboutUs = () => {
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Our Mission</h3>
             <p className="text-gray-600 dark:text-gray-300">
               To provide exceptional culinary experiences that delight our customers with every bite, 
-              using locally sourced ingredients and innovative cooking techniques.
+              using healthy ingredients and innovative cooking techniques.
             </p>
           </div>
 
@@ -44,43 +44,43 @@ const AboutUs = () => {
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Our Vision</h3>
             <p className="text-gray-600 dark:text-gray-300">
               To become the most beloved restaurant in our community, known for outstanding snacks, 
-              warm hospitality, and creating lasting memories for our guests.
+              warm hospitality, and creating lasting memories for our customers.
             </p>
           </div>
         </div>
 
-        {/* Story Section */}
+    
         <div className="bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 rounded-lg shadow-lg p-8 mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Our Story</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <h2 data-aos="fade-up" data-aos-duration="2000" data-aos-delay="100" className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Our Story</h2>
+              <p data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300"  className="text-gray-600 dark:text-gray-300 mb-4">
                 Founded in 2015, our restaurant began as a small family dream to share our passion 
                 for authentic cuisine with the community. What started as a humble kitchen has grown 
                 into a beloved dining destination.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <p data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" className="text-gray-600 dark:text-gray-300 mb-4">
                 Our Bakers bring years of experience from renowned culinary institutions, combining 
                 traditional techniques with modern innovation to make snacks that are both familiar 
                 and exciting.
               </p>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" className="text-gray-600 dark:text-gray-300">
                 Today, we continue to honor our roots while embracing new flavors and techniques, 
                 always striving to exceed our guests' expectations with every visit.
               </p>
             </div>
             <div className="relative">
-              <div className="w-full h-80 bg-gradient-to-br from-orange-300 to-orange-500 rounded-lg flex items-center justify-center">
+              <div data-aos="fade-up" data-aos-duration="3000" data-aos-delay="400" data-aos-easing="ease-in-out" className="w-full h-80 bg-gradient-to-br from-orange-300 to-orange-500 rounded-lg flex items-center justify-center">
                 <Home className="w-24 h-24 text-white" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Values Section */}
+    
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-12">Our Values</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <h2 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-12">Our Values</h2>
+          <div data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-20 h-20 bg-orange-300 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Favorite className="w-10 h-10 text-gray-800" />
@@ -116,8 +116,8 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Team Section */}
-        <div className="bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 rounded-lg shadow-lg p-8">
+
+        <div  data-aos="flip-up" data-aos-duration="3000" data-aos-delay="300" className="bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 rounded-lg shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-12">Meet Our Team</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center">
@@ -161,4 +161,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs
+export default AboutUs    

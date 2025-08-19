@@ -9,6 +9,7 @@ import Message from '../components/home/Message'
 import AboutUs from '../components/home/AboutUs'
 
 
+
 const HomePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,7 +28,6 @@ const HomePage = () => {
   }
 
   return (
-    <>
      <div className='dark:bg-black'>
       
 
@@ -35,10 +35,10 @@ const HomePage = () => {
         <HomeCarousel />
       </div>
 
-      {/* Hero Section */}
+      
       <div id="home" className="hidden sm:block">
-        <div className="mt-10 h-screen w-full relative overflow-hidden">
-          {/* Background image with filter to dim it */}
+        <div data-aos="flip-down" data-aos-duration="2000" data-aos-delay="100" className="mt-10 h-screen w-full relative overflow-hidden">
+          
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -47,9 +47,9 @@ const HomePage = () => {
             }}
           ></div>
           
-          {/* Status chip in top-right corner */}
+          
           {firstRestaurant && (
-            <div className="absolute top-14 right-10 z-20">
+            <div className="absolute top-14 right-10 z-20" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="300">
               <span className={`px-3 py-1 rounded-full text-2xl font-medium ${
                 isRestaurantOpen 
                   ? 'bg-orange-300 text-gray-700' 
@@ -60,16 +60,17 @@ const HomePage = () => {
             </div>
           )}
           
-          {/* Content with full opacity */}
+          
           <div className="relative flex flex-col items-center justify-center h-full z-10">
-            <h1 className="text-4xl font-bold text-white">Delicious Meals, Delivered Fast!</h1>
-            <p className="text-white">Order from your favorite restaurants with just a few taps.</p>
+            <h1 className="text-4xl font-bold text-white" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">Delicious Meals, Delivered Fast!</h1>
+            <p className="text-white" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Order from your favorite restaurant with just a few taps.</p>
             
-            {/* Conditional button - only show if restaurant is open */}
+            
             {isRestaurantOpen && firstRestaurant && (
               <button 
                 className="mt-6 px-8 py-3 bg-orange-300 text-gray-800 font-semibold rounded-full hover:bg-orange-400 transition-colors duration-200 text-xl bg-gradient-to-r from-orange-500 to-orange-300"
                 onClick={handleRestaurantRoute}
+                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"
               >
                 Order Now
               </button>
@@ -98,9 +99,7 @@ const HomePage = () => {
         <Message />
       </div>
 
-      
      </div>
-    </>
   )
 }
 

@@ -77,21 +77,21 @@ const HomeCarousel = () => {
  }
   return (
     <>
-    <div  className='shadow-2xs sm:hidden'>
+    <div  className='shadow-2xs sm:hidden' data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="100">
      <Slider {...settings}>
-      {heroCarousel.map((items) => (
-       <div className="mt-10 h-screen w-full relative overflow-hidden">
-       {/* Background image with filter to dim it */}
-       <div 
-         className="absolute inset-0 bg-cover bg-center"
-         style={{
-           backgroundImage: `url(${items.img})`,
-           filter: 'brightness(0.15)'
-         }}
-       ></div>
+      {heroCarousel.map((items, index) => (
+       <div className="mt-10 h-screen w-full relative overflow-hidden" data-aos="fade-up" data-aos-duration="1200" data-aos-delay={(index + 1) * 150}>
+        
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${items.img})`,
+            filter: 'brightness(0.15)'
+          }}
+        ></div>
 
           {firstRestaurant && (
-            <div className="absolute top-14 right-10 z-20">
+            <div className="absolute top-14 right-10 z-20" data-aos="fade-down" data-aos-duration="800" data-aos-delay="200">
               <span className={`px-3 py-1 rounded-full text-2xl font-medium ${
                 isRestaurantOpen 
                   ? 'bg-orange-300 text-gray-700' 
@@ -101,55 +101,56 @@ const HomeCarousel = () => {
               </span>
             </div>
           )}
-       
-       {/* Content with full opacity */}
-       <div className="relative flex flex-col items-center justify-center h-full z-10">
-         <h1 className="text-4xl font-bold text-white">{items.title}</h1>
-         <p className="text-white">{items.subtitle}</p>
+        
+        
+        <div className="relative flex flex-col items-center justify-center h-full z-10">
+          <h1 className="text-4xl font-bold text-white" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">{items.title}</h1>
+          <p className="text-white" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">{items.subtitle}</p>
 
-         {isRestaurantOpen && firstRestaurant && (
-              <button 
-              className="mt-6 px-8 py-3 bg-orange-300 text-gray-800 font-semibold rounded-full hover:bg-orange-400 transition-colors duration-200 text-xl bg-gradient-to-r from-orange-500 to-orange-300"
-              onClick={handleRestaurantRoute}
-            >
-              Order Now
-            </button>
-            )}
-       </div>
-     </div>
-      ))}
-     </Slider>
-    </div>
-
-    <div className="hidden sm:block">
-     <div className=''>
-      {heroCarousel.map((items) => 
-      <div>
-       {items.title === 'Delicious Snacks Await' ? (
-       <div className='relative '>
-        <img src={items.img} alt=""  className='md:h-screen md:w-screen'/>
-        <div className="absolute z-30 top-[27%] left-[16%] md:left-[35%] ">
-         <h1 className='text-4xl font-bold bg-gradient-to-r from-green-200 to-red-500 bg-clip-text text-transparent'>
-          {items.title}
-         </h1>
-         <h2 className='text-2xl text-center font-semibold text-gray-200'>
-          {items.subtitle}
-         </h2>
+          {isRestaurantOpen && firstRestaurant && (
+               <button 
+               className="mt-6 px-8 py-3 bg-orange-300 text-gray-800 font-semibold rounded-full hover:bg-orange-400 transition-colors duration-200 text-xl bg-gradient-to-r from-orange-500 to-orange-300"
+               onClick={handleRestaurantRoute}
+               data-aos="fade-up" data-aos-duration="800" data-aos-delay="350"
+             >
+               Order Now
+             </button>
+             )}
         </div>
-
-        <div className="absolute top-[65%] md:top-[50%] left-[35%]">
-         <a href="/RegisterPage" className='bg-gradient-to-r from-green-400 to-red-700 p-2 text-white rounded-md shadow-2xs'>
-         Get Started
-         </a>
-        </div>
-       </div>
-      ) : (
-       <div></div>
-      )}
       </div>
-      )}
+       ))}
+      </Slider>
      </div>
-    </div>
+
+     <div className="hidden sm:block">
+      <div className=''>
+       {heroCarousel.map((items, index) => 
+       <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay={(index + 1) * 150}>
+        {items.title === 'Delicious Snacks Await' ? (
+        <div className='relative '>
+         <img src={items.img} alt=""  className='md:h-screen md:w-screen'/>
+         <div className="absolute z-30 top-[27%] left-[16%] md:left-[35%] " data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          <h1 className='text-4xl font-bold bg-gradient-to-r from-green-200 to-red-500 bg-clip-text text-transparent' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+           {items.title}
+          </h1>
+          <h2 className='text-2xl text-center font-semibold text-gray-200' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+           {items.subtitle}
+          </h2>
+         </div>
+
+         <div className="absolute top-[65%] md:top-[50%] left-[35%]" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+          <a href="/RegisterPage" className='bg-gradient-to-r from-green-400 to-red-700 p-2 text-white rounded-md shadow-2xs'>
+          Get Started
+          </a>
+         </div>
+        </div>
+       ) : (
+        <div></div>
+       )}
+       </div>
+       )}
+      </div>
+     </div>
     </>
   )
 }
