@@ -28,7 +28,7 @@ const HomePage = () => {
   }
 
   return (
-     <div className='dark:bg-black'>
+     <div className='dark:bg-black px-4'>
       
 
       <div className="mt-10 sm:hidden">

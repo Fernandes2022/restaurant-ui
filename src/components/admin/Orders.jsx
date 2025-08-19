@@ -118,13 +118,13 @@ const Orders = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Orders Management</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="all">All Orders</option>
             {STATUS_OPTIONS.map(opt => (
@@ -143,7 +143,7 @@ const Orders = () => {
           return (
             <div
               key={order._id}
-              className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 ${
+              className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:p-6 border border-gray-200 dark:border-gray-700 ${
                 isUpdating ? 'opacity-75 relative' : ''
               }`}
             >
@@ -160,12 +160,12 @@ const Orders = () => {
                 </div>
               )}
               {/* Order Header */}
-              <div className="flex justify-between items-start mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white break-all">
                     OrderId: #{String(order._id).toUpperCase()}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">
                     {(() => {
                       const date = new Date(order.createdAt);
                       if (isNaN(date.getTime()) || date > new Date()) {
@@ -183,7 +183,7 @@ const Orders = () => {
                     })()}
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 sm:self-end">
                   {getStatusIcon(localStatus)}
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(localStatus)} ${
                     isUpdating ? 'animate-pulse' : ''
@@ -218,7 +218,7 @@ const Orders = () => {
                   {order.items?.map((item) => (
                     <div
                       key={item._id}
-                      className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                      className="flex items-center gap-3 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
                     >
                       {item.food?.images?.[0] && (
                         <img
@@ -253,7 +253,7 @@ const Orders = () => {
               </div>
 
               {/* Status Update Dropdown */}
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Update Status:
                 </label>
@@ -263,7 +263,7 @@ const Orders = () => {
                     value={localStatus}
                     onChange={(e) => handleStatusUpdate(order._id, e.target.value)}
                     disabled={isUpdating}
-                    className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+                    className="w-full sm:w-auto px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
                   >
                     {STATUS_OPTIONS.map(opt => (
                       <option key={opt.value} value={opt.value}>{opt.label}</option>

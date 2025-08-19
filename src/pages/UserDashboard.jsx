@@ -53,7 +53,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-black pt-16">
+    <div className="min-h-screen flex bg-gray-50 dark:bg-black pt-16 pb-20 md:pb-0">
       {/* Sidebar */}
       <aside className="w-64 bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 shadow-lg flex-shrink-0 hidden md:flex flex-col">
         <div className="p-6 border-b border-gray-100 dark:border-gray-700">
@@ -84,31 +84,34 @@ const UserDashboard = () => {
         </nav>
       </aside>
       
-      <aside className="md:hidden w-20 bg-white dark:bg-black dark:border-[0.5px] dark:border-orange-300 shadow-lg flex flex-col items-center py-4">
-        {sections.map((section) => (
+      {/* Mobile Bottom Nav */}
+      <aside className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-black dark:border-t-[0.5px] dark:border-orange-300 border-t border-gray-200 shadow z-40">
+        <div className="flex items-center justify-around h-16 px-2">
+          {sections.map((section) => (
+            <button
+              key={section.key}
+              onClick={() => setActiveSection(section.key)}
+              className={`text-sm w-12 h-12 rounded-full flex items-center justify-center transition ${activeSection === section.key ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100' : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'}`}
+              title={section.label}
+            >
+              {section.label[0]}
+            </button>
+          ))}
           <button
-            key={section.key}
-            onClick={() => setActiveSection(section.key)}
-            className={`text-2xl my-2 w-12 h-12 rounded-full flex items-center justify-center transition ${activeSection === section.key ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100' : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'}`}
-            title={section.label}
+            onClick={handleRestaurantRoute}
+            className="w-12 h-12 rounded-full flex items-center justify-center text-green-700 dark:text-green-200 hover:bg-green-100 dark:hover:bg-green-800"
+            title="Shop More"
           >
-            {section.label[0]}
+            <span className="text-xl">🛒</span>
           </button>
-        ))}
-        <button
-          onClick={handleRestaurantRoute}
-          className="text-2xl my-2 w-12 h-12 rounded-full flex items-center justify-center text-green-700 dark:text-green-200 hover:bg-green-100 dark:hover:bg-green-800"
-          title="Shop More"
-        >
-          <span>🛒</span>
-        </button>
-        <button
-          onClick={handleLogout}
-          className="text-2xl my-2 w-12 h-12 rounded-full flex items-center justify-center text-red-700 dark:text-red-200 hover:bg-red-100 dark:hover:bg-red-800"
-          title="Logout"
-        >
-          <LogoutIcon />
-        </button>
+          <button
+            onClick={handleLogout}
+            className="w-12 h-12 rounded-full flex items-center justify-center text-red-700 dark:text-red-200 hover:bg-red-100 dark:hover:bg-red-800"
+            title="Logout"
+          >
+            <LogoutIcon />
+          </button>
+        </div>
       </aside>
       {/* Main content */}
       <main className="w-full flex-1 flex flex-col items-center justify-start p-4">

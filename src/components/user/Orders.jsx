@@ -114,7 +114,8 @@ const Orders = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Your Orders</h2>
-      <div className="overflow-x-auto">
+      {/* Desktop table */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="min-w-full bg-white dark:bg-gray-800 rounded-lg shadow">
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -128,27 +129,40 @@ const Orders = () => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-200 font-mono">
-                  {order._id}
-                </td>
-                <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">
-                  {formatTime(order.createdAt)}
-                </td>
-                <td className="px-1 py-3 text-sm text-gray-700 dark:text-gray-200">
-                  {formatDate(order.createdAt)}
-                </td>
-                <td className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
-                  {formatCurrency(order.totalAmount)}
-                </td>
+                <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-200 font-mono">{order._id}</td>
+                <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{formatTime(order.createdAt)}</td>
+                <td className="px-1 py-3 text-sm text-gray-700 dark:text-gray-200">{formatDate(order.createdAt)}</td>
+                <td className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">{formatCurrency(order.totalAmount)}</td>
                 <td className="px-4 py-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeStyle(order.orderStatus)}`}>
-                    {formatStatus(order.orderStatus)}
-                  </span>
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeStyle(order.orderStatus)}`}>{formatStatus(order.orderStatus)}</span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile cards */}
+      <div className="sm:hidden space-y-3">
+        {orders.map((order) => (
+          <div key={order._id} className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs text-gray-500 dark:text-gray-400 break-all">{order._id}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                  <span className="font-medium">{formatDate(order.createdAt)}</span>
+                  <span className="mx-2">•</span>
+                  {formatTime(order.createdAt)}
+                </p>
+              </div>
+              <span className={`shrink-0 px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeStyle(order.orderStatus)}`}>{formatStatus(order.orderStatus)}</span>
+            </div>
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-sm text-gray-600 dark:text-gray-300">Total</span>
+              <span className="text-base font-semibold text-gray-800 dark:text-gray-100">{formatCurrency(order.totalAmount)}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

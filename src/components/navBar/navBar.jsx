@@ -84,6 +84,7 @@ const NavBar = () => {
     userProfile?.fullName ? userProfile.fullName.charAt(0).toUpperCase() : <Person />;
 
   const handleAvatarClick = () => {
+    setNavMobile(false);
     if (!userProfile || userProfile === null) {
       setAuthModalOpen(true);
     } else {
@@ -107,26 +108,31 @@ const NavBar = () => {
 
   const isHomePage = location.pathname === '/';
 
+  // Close mobile menu on route changes
+  useEffect(() => {
+    setNavMobile(false);
+  }, [location.pathname]);
+
   return (
     <>
-      <header className="lg:px-4">
+      <header className="px-3 lg:px-4">
         <nav
-          className="top-0 left-0 right-0 border border-t-0 border-r-0 border-l-0 dark:bg-black border-b-slate-200 dark:border-b-slate-500 fixed z-50 backdrop-blur-3xl py-2"
+          className="top-0 left-0 right-0 border border-t-0 border-r-0 border-l-0 dark:bg-black border-b-slate-200 dark:border-b-slate-500 fixed z-50 backdrop-blur-3xl py-3 sm:py-2"
           data-aos="flip-up"
           data-aos-duration="2000"
         >
-          <div className="flex items-center justify-between z-50 px-4">
-            <div className="pr-2">
+          <div className="flex items-center justify-between z-50 px-3 sm:px-4 gap-2 sm:gap-4">
+            <div className="pr-2 flex-shrink-0">
               <Link to={'/'}>
-                <h1 className="font-bold tracking-tighter text-3xl bg-gradient-to-r from-orange-300 to-yellow-100 bg-clip-text text-transparent">
+                <h1 className="font-bold tracking-tighter text-2xl sm:text-3xl whitespace-nowrap bg-gradient-to-r from-orange-300 to-yellow-100 bg-clip-text text-transparent">
                   Nutri-C
                 </h1>
               </Link>
             </div>
 
             {/* Search Box */}
-            <div className=" md:w-full max-w-sm relative px-3">
-              <div className="flex items-center border border-gray-300 rounded-2xl px-3 py-1 bg-white shadow-sm">
+            <div className="flex-1 min-w-0 md:w-full max-w-sm relative px-2 sm:px-3">
+              <div className="flex items-center border border-gray-300 rounded-2xl px-3 py-2 sm:py-1 bg-white shadow-sm">
                 <Search className="text-gray-500 mr-2" />
                 <input
                   type="text"
@@ -254,9 +260,9 @@ const NavBar = () => {
             </Box>
 
             {/* Mobile Nav Toggle */}
-            <div className="sm:hidden">
+            <div className="sm:hidden flex-shrink-0">
               <button
-                className="text-orange-300 cursor-pointer outline-0 p-2"
+                className="text-orange-300 cursor-pointer outline-0 p-3"
                 onClick={() => setNavMobile(!navMobile)}
               >
                 {navMobile ? <Close sx={{ fontSize: 45 }} /> : <Menu sx={{ fontSize: 45 }} />}
@@ -270,7 +276,7 @@ const NavBar = () => {
           <div
             className="fixed top-20 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700 shadow-lg sm:hidden"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-6 space-y-4" onClick={() => setNavMobile(false)}>
               {isHomePage && (
                 <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700">
                   {['home', 'menu', 'testimonials', 'about', 'contact'].map((section) => (
@@ -290,7 +296,7 @@ const NavBar = () => {
                   <IconButton
                     className="text-orange-600 hover:text-orange-700 transition-colors relative"
                     size="large"
-                    onClick={() => navigate('/cart')}
+                    onClick={() => { setNavMobile(false); navigate('/cart'); }}
                     sx={{
                       width: 48,
                       height: 48,
@@ -339,7 +345,7 @@ const NavBar = () => {
 
                 {/* Theme Toggle */}
                 <IconButton
-                  onClick={themeToggle}
+                  onClick={() => { themeToggle(); setNavMobile(false); }}
                   className="text-orange-600 hover:text-orange-700 transition-colors"
                   size="large"
                   sx={{

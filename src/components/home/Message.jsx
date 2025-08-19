@@ -134,7 +134,7 @@ const Message = () => {
   };
 
   return (
-    <div  className="min-h-screen bg-gray-50 dark:bg-black dark:border-[0.5px] dark:border-orange-300 py-24">
+    <div  className="px-4 min-h-screen bg-gray-50 dark:bg-black dark:border-[0.5px] dark:border-orange-300 py-24">
       <style>{darkModeStyles}</style>
       <Container data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" maxWidth="md">
         <Paper elevation={3} sx={{ overflow: 'hidden', bgcolor: 'white' }} className="dark:bg-transparent">

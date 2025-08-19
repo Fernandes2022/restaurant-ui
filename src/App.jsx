@@ -10,6 +10,8 @@ import 'aos/dist/aos.css'
 import Cart from './components/cart/Cart'
 import RestaurantRoute from './routers/RestaurantRoute'
 import RestaurantPage from './pages/RestaurantPage'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 
 
@@ -40,6 +42,8 @@ const App = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/user/:id/dashboard*' element={<UserDashboard />} />
         <Route path='/restaurant/:id' element={<RestaurantPage />} />
         <Route path='/restaurant/:id/dashboard*' element={<RestaurantRoute />} />
