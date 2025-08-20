@@ -15,7 +15,6 @@ const Mode = ({ children }) => {
 
   useEffect(() => {
     const element = document.documentElement;
-
     if (theme === 'dark') {
       element.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -25,21 +24,29 @@ const Mode = ({ children }) => {
     }
   }, [theme]);
 
-  // Listen for changes in system theme
+    
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
+      const savedTheme = localStorage.getItem('theme');
+      if (!savedTheme) {
         setTheme(e.matches ? 'dark' : 'light');
       }
     };
-
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   const themeToggle = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      // If user already set a preference, just toggle
+      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    } else {
+      // If no preference saved, set explicitly
+      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+      localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark');
+    }
   };
 
   return (

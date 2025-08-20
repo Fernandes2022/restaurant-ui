@@ -173,7 +173,7 @@ const NavBar = () => {
 
             {/* Navigation Links - Desktop */}
             {isHomePage && (
-              <Box className="hidden lg:flex items-center space-x-6 mr-4">
+              <Box className="hidden lg:flex items-center space-x-6 mr-4 ">
                 {['home', 'menu', 'testimonials', 'about', 'contact'].map((section) => (
                   <button
                     key={section}
@@ -260,7 +260,7 @@ const NavBar = () => {
             </Box>
 
             {/* Mobile Nav Toggle */}
-            <div className="sm:hidden flex-shrink-0">
+            <div className="sm:hidden flex-shrink-0 px-4">
               <button
                 className="text-orange-300 cursor-pointer outline-0 p-3"
                 onClick={() => setNavMobile(!navMobile)}
@@ -274,11 +274,11 @@ const NavBar = () => {
         {/* Mobile Menu */}
         {navMobile && (
           <div
-            className="fixed top-20 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700 shadow-lg sm:hidden"
+            className="px-4 fixed top-20 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700 shadow-lg sm:hidden "
           >
             <div className="px-4 py-6 space-y-4" onClick={() => setNavMobile(false)}>
               {isHomePage && (
-                <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700">
+                <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700 px-4">
                   {['home', 'menu', 'testimonials', 'about', 'contact'].map((section) => (
                     <button
                       key={section}

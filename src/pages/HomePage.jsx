@@ -28,8 +28,8 @@ const HomePage = () => {
   }
 
   return (
-     <div className='dark:bg-black px-4'>
-      
+     <div className='dark:bg-black '>
+    
 
       <div className="mt-10 sm:hidden">
         <HomeCarousel />
@@ -95,7 +95,7 @@ const HomePage = () => {
       </div>
 
       {/* Contact Section */}
-      <div id="contact">
+      <div className='px-2' id="contact">
         <Message />
       </div>
 
@@ -103,4 +103,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default HomePage 

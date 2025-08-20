@@ -103,8 +103,8 @@ const HomeCarousel = () => {
           )}
         
         
-        <div className="relative flex flex-col items-center justify-center h-full z-10">
-          <h1 className="text-4xl font-bold text-white" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">{items.title}</h1>
+        <div className="relative flex flex-col items-center justify-center h-full z-10 px-4">
+          <h1 className="text-4xl font-bold text-white text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">{items.title}</h1>
           <p className="text-white" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">{items.subtitle}</p>
 
           {isRestaurantOpen && firstRestaurant && (
@@ -130,7 +130,7 @@ const HomeCarousel = () => {
         <div className='relative '>
          <img src={items.img} alt=""  className='md:h-screen md:w-screen'/>
          <div className="absolute z-30 top-[27%] left-[16%] md:left-[35%] " data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-          <h1 className='text-4xl font-bold bg-gradient-to-r from-green-200 to-red-500 bg-clip-text text-transparent' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+          <h1 className='text-3xl font-bold bg-gradient-to-r from-green-200 to-red-500 bg-clip-text text-transparent text-center' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
            {items.title}
           </h1>
           <h2 className='text-2xl text-center font-semibold text-gray-200' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
