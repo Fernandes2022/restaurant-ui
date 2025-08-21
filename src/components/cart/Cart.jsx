@@ -342,8 +342,8 @@ const Cart = () => {
       </div>
 
       {/* Modal */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box className="absolute top-1/2 left-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-black dark:border dark:border-orange-300 rounded-lg shadow-lg p-8 outline-none" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+      <Modal className='mx-3' open={modalOpen} onClose={() => setModalOpen(false)}>
+        <Box className="absolute top-1/2 left-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-lg shadow-lg p-6 outline-none max-h-[90vh] overflow-auto ">
           <h3 className="text-xl font-bold mb-4 text-orange-600 dark:text-orange-300">Add New Address & Order</h3>
           {hasUnavailableItem && (
             <div className="mb-4 p-3 rounded bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border border-red-200 dark:border-red-800">

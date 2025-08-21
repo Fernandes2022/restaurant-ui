@@ -24,6 +24,7 @@ const RestaurantPage = () => {
   const cart = useSelector((state) => state.cart.cart);
   const cartItems = cart?.items || [];
   const token = useSelector((state) => state.auth.token);
+  const isRestaurantOpen = restaurant?.open === true;
 
   useEffect(() => {
     dispatch(fetchRestaurants());
@@ -155,144 +156,153 @@ const RestaurantPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="w-full lg:w-64 bg-white dark:bg-black dark:border-[0.2px] dark:border-orange-300 rounded-lg shadow-lg p-6 flex-shrink-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
-            <h2 className="text-xl font-bold text-orange-600 dark:text-orange-300 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Categories</h2>
-            {categoriesLoading ? (
-              <div className="flex justify-center py-4">
-                <CircularProgress size={24} className="text-orange-600" />
-              </div>
-            ) : (
-              <nav className="space-y-2">
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition font-medium ${
-                    selectedCategory === 'all'
-                      ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'
-                  }`}
-                >
-                  All
-                </button>
-                {categories.map((category, idx) => (
+      {isRestaurantOpen ? (
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <aside className="w-full lg:w-64 bg-white dark:bg-black dark:border-[0.2px] dark:border-orange-300 rounded-lg shadow-lg p-6 flex-shrink-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+              <h2 className="text-xl font-bold text-orange-600 dark:text-orange-300 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Categories</h2>
+              {categoriesLoading ? (
+                <div className="flex justify-center py-4">
+                  <CircularProgress size={24} className="text-orange-600" />
+                </div>
+              ) : (
+                <nav className="space-y-2">
                   <button
-                    key={category._id}
-                    onClick={() => setSelectedCategory(category._id)}
+                    onClick={() => setSelectedCategory('all')}
                     className={`w-full text-left px-4 py-3 rounded-lg transition font-medium ${
-                      selectedCategory === category._id
+                      selectedCategory === 'all'
                         ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100'
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'
                     }`}
-                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 120}
                   >
-                    {category.name}
+                    All
                   </button>
-                ))}
-              </nav>
-            )}
-          </aside>
-
-          <main className="flex-1">
-            <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Menu</h2>
-                <div className="flex items-center gap-2 text-orange-600 dark:text-orange-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
-                  <ShoppingCart />
-                  <span className="font-semibold">{cartItems.length} items</span>
-                </div>
-              </div>
-
-              {filteredMenuItems.length === 0 ? (
-                <div className="text-center py-12 text-gray-500 dark:text-gray-400" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                  <Restaurant className="text-6xl mb-4 mx-auto" />
-                  <p>No menu items found for this category.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMenuItems.map((item, idx) => {
-                    const cartQuantity = getCartQuantity(item._id);
-                    const currentQuantity = quantities[item._id] || 0;
-
-                    return (
-                      <div
-                        key={item._id}
-                        className="dark:border-[0.2px] dark:border-orange-300 rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform hover:-translate-y-1 bg-white dark:bg-black p-2"
-                        data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 150}
-                      >
-                        <div className="h-32 md:h-40 overflow-hidden">
-                          <img
-                            src={item.images?.[0] || '/default-food.jpg'}
-                            alt={item.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-
-                        <div className="p-4">
-                          <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 mb-2">{item.name}</h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{item.description}</p>
-
-                          <div className="flex items-center justify-between mb-4">
-                            <span className="text-xl font-bold text-orange-600 dark:text-orange-300">₦{item.price}</span>
-                            <div className="flex items-center gap-1">
-                              <Star className="text-yellow-500 text-sm" />
-                              <span className="text-sm text-gray-600 dark:text-gray-400">4.5</span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between gap-4">
-                            <div className="flex items-center gap-2">
-                                {item.available? <><IconButton
-                                size="small"
-                                onClick={() => handleQuantityChange(item._id, -1)}
-                                className="text-orange-600 hover:bg-orange-50 dark:hover:bg-green-500 dark:bg-orange-700"
-                              >
-                                <Remove />
-                              </IconButton>
-                              <span className="px-3 py-1 font-medium text-gray-800 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 rounded-md min-w-[40px] text-center">
-                                {currentQuantity}
-                              </span>
-                              <IconButton
-                                size="small"
-                                onClick={() => handleQuantityChange(item._id, 1)}
-                                className="text-orange-600 hover:bg-orange-50 dark:hover:bg-green-500 dark:bg-orange-300"
-                              >
-                                <Add />
-                              </IconButton>
-                              </>
-                              :
-                              <span className="text-red-500">
-                                Not Available at the moment
-                              </span>
-                            }
-                            </div>
-
-                            <button
-                              onClick={() => handleAddToCart(item, currentQuantity)}
-                              disabled={currentQuantity <= 0 || addingItemId === item._id}
-                              className="bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
-                            >
-                              {addingItemId === item._id ? 'Adding...' : `Add ${currentQuantity} to Cart`}
-                            </button>
-                          </div>
-
-                          {cartQuantity > 0 && (
-                            <div className="mt-2 text-center">
-                              <span className="text-sm text-green-600 dark:text-green-400">
-                                {cartQuantity} in cart
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                  {categories.map((category, idx) => (
+                    <button
+                      key={category._id}
+                      onClick={() => setSelectedCategory(category._id)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition font-medium ${
+                        selectedCategory === category._id
+                          ? 'bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'
+                      }`}
+                      data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 120}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </nav>
               )}
-            </div>
-          </main>
+            </aside>
+
+            <main className="flex-1">
+              <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Menu</h2>
+                  <div className="flex items-center gap-2 text-orange-600 dark:text-orange-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
+                    <ShoppingCart />
+                    <span className="font-semibold">{cartItems.length} items</span>
+                  </div>
+                </div>
+
+                {filteredMenuItems.length === 0 ? (
+                  <div className="text-center py-12 text-gray-500 dark:text-gray-400" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <Restaurant className="text-6xl mb-4 mx-auto" />
+                    <p>No menu items found for this category.</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredMenuItems.map((item, idx) => {
+                      const cartQuantity = getCartQuantity(item._id);
+                      const currentQuantity = quantities[item._id] || 0;
+
+                      return (
+                        <div
+                          key={item._id}
+                          className="dark:border-[0.2px] dark:border-orange-300 rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform hover:-translate-y-1 bg-white dark:bg-black p-2"
+                          data-aos="fade-up" data-aos-duration="1000" data-aos-delay={(idx + 1) * 150}
+                        >
+                          <div className="h-32 md:h-40 overflow-hidden">
+                            <img
+                              src={item.images?.[0] || '/default-food.jpg'}
+                              alt={item.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+
+                          <div className="p-4">
+                            <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 mb-2">{item.name}</h3>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{item.description}</p>
+
+                            <div className="flex items-center justify-between mb-4">
+                              <span className="text-xl font-bold text-orange-600 dark:text-orange-300">₦{item.price}</span>
+                              <div className="flex items-center gap-1">
+                                <Star className="text-yellow-500 text-sm" />
+                                <span className="text-sm text-gray-600 dark:text-gray-400">4.5</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-4">
+                              <div className="flex items-center gap-2">
+                                  {item.available? <><IconButton
+                                  size="small"
+                                  onClick={() => handleQuantityChange(item._id, -1)}
+                                  className="text-orange-600 hover:bg-orange-50 dark:hover:bg-green-500 dark:bg-orange-700"
+                                >
+                                  <Remove />
+                                </IconButton>
+                                <span className="px-3 py-1 font-medium text-gray-800 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 rounded-md min-w-[40px] text-center">
+                                  {currentQuantity}
+                                </span>
+                                <IconButton
+                                  size="small"
+                                  onClick={() => handleQuantityChange(item._id, 1)}
+                                  className="text-orange-600 hover:bg-orange-50 dark:hover:bg-green-500 dark:bg-orange-300"
+                                >
+                                  <Add />
+                                </IconButton>
+                                </>
+                                :
+                                <span className="text-red-500">
+                                  Not Available at the moment
+                                </span>
+                              }
+                              </div>
+
+                              <button
+                                onClick={() => handleAddToCart(item, currentQuantity)}
+                                disabled={currentQuantity <= 0 || addingItemId === item._id}
+                                className="bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+                              >
+                                {addingItemId === item._id ? 'Adding...' : `Add ${currentQuantity} to Cart`}
+                              </button>
+                            </div>
+
+                            {cartQuantity > 0 && (
+                              <div className="mt-2 text-center">
+                                <span className="text-sm text-green-600 dark:text-green-400">
+                                  {cartQuantity} in cart
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </main>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+            <p className="text-yellow-800 dark:text-yellow-200 font-medium">Restaurant is currently closed.</p>
+            <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">Menu items and categories are hidden until it opens.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

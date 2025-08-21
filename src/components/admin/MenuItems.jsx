@@ -281,7 +281,7 @@ const MenuItems = () => {
         </div>
       )}
 
-      <Modal
+      <Modal className='mx-3'
         open={showAddModal}
         onClose={() => {
           setShowAddModal(false);

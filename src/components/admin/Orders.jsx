@@ -147,7 +147,7 @@ const Orders = () => {
                 isUpdating ? 'opacity-75 relative' : ''
               }`}
             >
-              {/* Loading overlay for individual order */}
+              
               {isUpdating && (
                 <div className="absolute inset-0 bg-white/50 dark:bg-gray-800/50 rounded-lg flex items-center justify-center z-10">
                   <div className="flex items-center gap-2 text-orange-600">
@@ -159,7 +159,7 @@ const Orders = () => {
                   </div>
                 </div>
               )}
-              {/* Order Header */}
+              
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white break-all">
